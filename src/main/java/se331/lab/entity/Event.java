@@ -17,3 +17,4 @@ public class Event {
     boolean petAllowed;
     String organizer;
 }
+

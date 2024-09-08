@@ -1,6 +1,8 @@
 package se331.lab.rest.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import se331.lab.entity.Event;
 
 import jakarta.annotation.PostConstruct;
@@ -26,7 +28,6 @@ public class EventController {
                 .petAllowed(true)
                 .organizer("Kat Laydee")
                 .build());
-        eventList = new ArrayList<>();
         eventList.add(Event.builder()
                 .id(456L)
                 .category("food")
@@ -38,7 +39,6 @@ public class EventController {
                 .petAllowed(true)
                 .organizer("Fern Pollin")
                 .build());
-        eventList = new ArrayList<>();
         eventList.add(Event.builder()
                 .id(789L)
                 .category("sustainability")
@@ -50,7 +50,6 @@ public class EventController {
                 .petAllowed(false)
                 .organizer("Carey Wales")
                 .build());
-        eventList = new ArrayList<>();
         eventList.add(Event.builder()
                 .id(1001L)
                 .category("animal welfare")
@@ -62,7 +61,6 @@ public class EventController {
                 .petAllowed(true)
                 .organizer("Dawg Dahd")
                 .build());
-        eventList = new ArrayList<>();
         eventList.add(Event.builder()
                 .id(1002L)
                 .category("food")
@@ -74,9 +72,8 @@ public class EventController {
                 .petAllowed(true)
                 .organizer("Kahn Opiner")
                 .build());
-        eventList = new ArrayList<>();
         eventList.add(Event.builder()
-                .id(123L)
+                .id(1003L)
                 .category("sustainability")
                 .title("Highway Cleanup")
                 .description("Help pick up trash along the highway.")
@@ -86,5 +83,10 @@ public class EventController {
                 .petAllowed(false)
                 .organizer("Brody Kill")
                 .build());
+    }
+
+    @GetMapping("events")
+    public ResponseEntity<?> getEventLists(){
+        return ResponseEntity.ok(eventList);
     }
 }
