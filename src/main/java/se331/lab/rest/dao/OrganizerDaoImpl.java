@@ -23,7 +23,26 @@ public class OrganizerDaoImpl implements OrganizerDao {
                 .name("Fern Pollin")
                 .address("456 Garden Avenue")
                 .build());
-        // Add more organizers as needed
+        organizerList.add(Organizer.builder()
+                .id(3L)
+                .name("Carey Wales")
+                .address("789 Playa Del Carmen")
+                .build());
+        organizerList.add(Organizer.builder()
+                .id(4L)
+                .name("Dawg Dahd")
+                .address("1001 Woof Town")
+                .build());
+        organizerList.add(Organizer.builder()
+                .id(5L)
+                .name("Kahn Opiner")
+                .address("1002 Tin City")
+                .build());
+        organizerList.add(Organizer.builder()
+                .id(6L)
+                .name("Brody Kill")
+                .address("1003 Highway 50")
+                .build());
     }
 
     @Override
