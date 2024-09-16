@@ -18,20 +18,26 @@ import se331.lab.rest.service.EventService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.beans.support.PagedListHolder.DEFAULT_PAGE_SIZE;
+
 @Controller
 @RequiredArgsConstructor
 public class EventController {
     final EventService eventService;
 
     @GetMapping("events")
-    public ResponseEntity<?> getEventLists(@RequestParam(value = "_limit",
-            required = false)Integer perPage
-    ,@RequestParam(value = "_page", required = false)Integer page) {
+    public ResponseEntity<?> getEventLists(
+            @RequestParam(value = "_limit", required = false) Integer perPage,
+            @RequestParam(value = "_page", required = false) Integer page) {
+        // Ensure perPage has a default value if null (if needed)
+        perPage = perPage != null ? perPage : DEFAULT_PAGE_SIZE;
+
         Page<Event> pageOutput = eventService.getEvents(perPage, page);
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
         return new ResponseEntity<>(pageOutput.getContent(), responseHeader, HttpStatus.OK);
     }
+
 
     @GetMapping("events/{id}")
     public ResponseEntity<?> getEvent(@PathVariable("id") Long id){
