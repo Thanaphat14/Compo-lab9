@@ -5,14 +5,19 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import se331.lab.rest.entity.Event;
+import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.repository.EventRepository;
+import se331.lab.rest.repository.OrganizerRepository;
 
 @Component
 @RequiredArgsConstructor
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     final EventRepository eventRepository;
+    final OrganizerRepository organizerRepository;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        // Save Events
         eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Midterm Exam")
@@ -49,5 +54,27 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("10.00am - 6.00 pm.")
                 .petAllowed(true)
                 .organizer("Chiang Mai, Municipality").build());
+
+        // Save Organizers
+        organizerRepository.save(Organizer.builder()
+                .id(1L)
+                .name("CAMT")
+                .address("123 CAMT Street")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(2L)
+                .name("CMU")
+                .address("456 CMU Campus")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(3L)
+                .name("Chiang Mai")
+                .address("789 Old City")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(4L)
+                .name("Chiang Mai, Municipality")
+                .address("1011 Municipality Hall")
+                .build());
     }
 }
