@@ -7,16 +7,23 @@ import org.springframework.stereotype.Component;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.repository.EventRepository;
+import se331.lab.rest.repository.OrganizerRepository;
 
 @Component
 @RequiredArgsConstructor
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     final EventRepository eventRepository;
+    final OrganizerRepository organizerRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         // Save Events
-        eventRepository.save(Event.builder()
+        Organizer org1, org2, org3;
+        org1 = organizerRepository.save(Organizer.builder().name("CAMT").build());
+        org2 = organizerRepository.save(Organizer.builder().name("CMU").build());
+        org3 = organizerRepository.save(Organizer.builder().name("ChiangMai").build());
+        Event tempEvent;
+        tempEvent = eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Midterm Exam")
                 .description("A time for taking the exam")
@@ -25,7 +32,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("3.00-4.00 pm.")
                 .petAllowed(false)
                 .build());
-        eventRepository.save(Event.builder()
+        tempEvent.setOrganizer(org1);
+        org1.getOwnEvents().add(tempEvent);
+        tempEvent = eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Commencement Day")
                 .description("A time for celebration")
@@ -34,7 +43,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("8.00am-4.00 pm.")
                 .petAllowed(false)
                 .build());
-        eventRepository.save(Event.builder()
+        tempEvent.setOrganizer(org1);
+        org1.getOwnEvents().add(tempEvent);
+        tempEvent = eventRepository.save(Event.builder()
                 .category("Cultural")
                 .title("Loy Krathong")
                 .description("A time for Krathong")
@@ -43,7 +54,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("8.00-10.00 pm.")
                 .petAllowed(false)
                 .build());
-        eventRepository.save(Event.builder()
+        tempEvent.setOrganizer(org2);
+        org1.getOwnEvents().add(tempEvent);
+        tempEvent = eventRepository.save(Event.builder()
                 .category("Cultural")
                 .title("Songkran")
                 .description("Let's Play Water")
@@ -52,5 +65,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("10.00am - 6.00 pm.")
                 .petAllowed(true)
                 .build());
+        tempEvent.setOrganizer(org3);
+        org1.getOwnEvents().add(tempEvent);
     }
 }
