@@ -10,14 +10,14 @@ import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.entity.Participant;
 import se331.lab.rest.repository.EventRepository;
 import se331.lab.rest.repository.OrganizerRepository;
-import se331.lab.rest.repository.ParticipantRepository; // Add this import
+import se331.lab.rest.repository.ParticipantRepository;
 
 @Component
 @RequiredArgsConstructor
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     final EventRepository eventRepository;
     final OrganizerRepository organizerRepository;
-    final ParticipantRepository participantRepository; // Add this field
+    final ParticipantRepository participantRepository;
 
     @Override
     @Transactional
@@ -77,14 +77,12 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         tempEvent4.setOrganizer(org3);
         org3.getOwnEvents().add(tempEvent4);
 
-        // Create Participants
         Participant participant1 = participantRepository.save(Participant.builder().name("John Doe").telNo("123-456-7890").build());
         Participant participant2 = participantRepository.save(Participant.builder().name("Jane Smith").telNo("098-765-4321").build());
         Participant participant3 = participantRepository.save(Participant.builder().name("Alice Brown").telNo("456-123-7890").build());
         Participant participant4 = participantRepository.save(Participant.builder().name("Bob Johnson").telNo("321-654-0987").build());
         Participant participant5 = participantRepository.save(Participant.builder().name("Charlie Davis").telNo("789-012-3456").build());
 
-        // Assign Participants to Events
         tempEvent1.getParticipants().add(participant1);
         tempEvent1.getParticipants().add(participant2);
         tempEvent1.getParticipants().add(participant3);

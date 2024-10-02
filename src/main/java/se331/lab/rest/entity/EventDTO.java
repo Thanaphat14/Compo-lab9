@@ -21,5 +21,5 @@ public class EventDTO {
     String time;
     Boolean petAllowed;
     EventOrganizerDTO organizer;
-    List<ParticipantDTO> participants; // Include the participants list
+    List<ParticipantDTO> participants;
 }
