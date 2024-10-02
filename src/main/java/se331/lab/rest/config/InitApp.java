@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.repository.EventRepository;
-import se331.lab.rest.repository.OrganizerRepository;
 
 @Component
 @RequiredArgsConstructor
