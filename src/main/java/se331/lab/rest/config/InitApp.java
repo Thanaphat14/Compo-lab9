@@ -12,7 +12,6 @@ import se331.lab.rest.repository.EventRepository;
 @RequiredArgsConstructor
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     final EventRepository eventRepository;
-    final OrganizerRepository organizerRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -25,7 +24,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .date("3rd Sept")
                 .time("3.00-4.00 pm.")
                 .petAllowed(false)
-                .organizer("CAMT").build());
+                .build());
         eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Commencement Day")
@@ -34,7 +33,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .date("21th Jan")
                 .time("8.00am-4.00 pm.")
                 .petAllowed(false)
-                .organizer("CMU").build());
+                .build());
         eventRepository.save(Event.builder()
                 .category("Cultural")
                 .title("Loy Krathong")
@@ -43,7 +42,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .date("21th Nov")
                 .time("8.00-10.00 pm.")
                 .petAllowed(false)
-                .organizer("Chiang Mai").build());
+                .build());
         eventRepository.save(Event.builder()
                 .category("Cultural")
                 .title("Songkran")
@@ -52,28 +51,6 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .date("13th April")
                 .time("10.00am - 6.00 pm.")
                 .petAllowed(true)
-                .organizer("Chiang Mai, Municipality").build());
-
-        // Save Organizers
-        organizerRepository.save(Organizer.builder()
-                .id(1L)
-                .name("CAMT")
-                .address("123 CAMT Street")
-                .build());
-        organizerRepository.save(Organizer.builder()
-                .id(2L)
-                .name("CMU")
-                .address("456 CMU Campus")
-                .build());
-        organizerRepository.save(Organizer.builder()
-                .id(3L)
-                .name("Chiang Mai")
-                .address("789 Old City")
-                .build());
-        organizerRepository.save(Organizer.builder()
-                .id(4L)
-                .name("Chiang Mai, Municipality")
-                .address("1011 Municipality Hall")
                 .build());
     }
 }
